@@ -5,8 +5,8 @@
   "main": "main.js",
   "scripts": {
     "start": "node src/main",
-    "start:and": "node src/and",
-    "start:or": "node src/or",
+    "start:and": "node src/operation/and",
+    "start:or": "node src/operation/or",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

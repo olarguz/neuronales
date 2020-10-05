@@ -1,30 +1,28 @@
 const tf = require("@tensorflow/tfjs");
 
-const createModel = (input, inner, output) => {
+exports.createModel = (layers) => {
   const model = tf.sequential();
   model.add(
     tf.layers.dense({
-      units: input,
-      inputShape: [input],
-      activacion: "relu",
+      units: layers.input,
+      inputShape: [layers.input],
+      activacion: "sigmoid",
     })
   );
-  inner.map((layer) =>
-    model.add(tf.layers.dense({ units: layer, activation: "sigmoid" }))
+  layers.inner.map((inner) =>
+    model.add(tf.layers.dense({ units: inner, activation: "sigmoid" }))
   );
   model.add(
     tf.layers.dense({
-      units: output,
+      units: layers.output,
       kernelInitializer: "varianceScaling",
       activation: "softmax",
     })
   );
   model.compile({
     loss: "meanSquaredError",
-    optimizer: "sgd",
+    optimizer: tf.train.adam(),
     metrics: ["accuracy"],
   });
   return model;
 };
-
-exports.createModel = createModel;
