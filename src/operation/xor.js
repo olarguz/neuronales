@@ -1,7 +1,7 @@
 const tf = require("@tensorflow/tfjs");
 const perceptron = require("../perceptron/perceptron");
 
-console.log("Compuerta Or");
+console.log("Compuerta XOr");
 
 let layers = {
   input: {
@@ -26,7 +26,7 @@ const real = {
     [0.0, 1.0],
     [0.0, 0.0],
   ]),
-  outputs: tf.tensor1d([1.0, 1.0, 1.0, 0.0]),
+  outputs: tf.tensor1d([0.0, 1.0, 1.0, 0.0]),
 };
 const test = {
   inputs: tf.tensor2d([
@@ -35,11 +35,11 @@ const test = {
     [0.0, 1.0],
     [0.0, 0.0],
   ]),
-  outputs: tf.tensor1d([1.0, 1.0, 1.0, 0.0]),
+  outputs: tf.tensor1d([0.0, 1.0, 1.0, 0.0]),
 };
 model
   .fit(real.inputs, real.outputs, {
-    epochs: 120,
+    epochs: 200,
     batchSize: 4,
     shuffle: true,
     validationData: [test.inputs, test.outputs],

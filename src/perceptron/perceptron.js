@@ -4,19 +4,21 @@ exports.createModel = (layers) => {
   const model = tf.sequential();
   model.add(
     tf.layers.dense({
-      units: layers.input,
-      inputShape: [layers.input],
-      activacion: "sigmoid",
+      units: layers.input.units,
+      inputShape: [layers.input.units],
+      activation: layers.input.activation,
     })
   );
-  layers.inner.map((inner) =>
-    model.add(tf.layers.dense({ units: inner, activation: "sigmoid" }))
+  layers.inner.units.map((unit) =>
+    model.add(
+      tf.layers.dense({ units: unit, activation: layers.inner.activation })
+    )
   );
   model.add(
     tf.layers.dense({
-      units: layers.output,
+      units: layers.output.units,
       kernelInitializer: "varianceScaling",
-      activation: "softmax",
+      activation: layers.output.activation,
     })
   );
   model.compile({

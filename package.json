@@ -7,6 +7,7 @@
     "start": "node src/main",
     "start:and": "node src/operation/and",
     "start:or": "node src/operation/or",
+    "start:xor": "node src/operation/xor",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

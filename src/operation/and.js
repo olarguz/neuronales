@@ -4,9 +4,18 @@ const perceptron = require("../perceptron/perceptron");
 console.log("Compuerta And");
 
 let layers = {
-  input: 2,
-  inner: [3, 4],
-  output: 1,
+  input: {
+    units: 2,
+    activation: "sigmoid"
+  },
+  inner: {
+    units: [3, 4],
+    activation: "sigmoid"
+  },
+  output: {
+    units: 1,
+    activation: "softmax"
+  }
 };
 model = perceptron.createModel(layers);
 
