@@ -37,13 +37,14 @@ const test = {
   ]),
   outputs: tf.tensor1d([1.0, 1.0, 1.0, 0.0]),
 };
+const options = {
+  epochs: 10,
+  batchSize: 4,
+  shuffle: true,
+  validationData: [test.inputs, test.outputs],
+};
 model
-  .fit(real.inputs, real.outputs, {
-    epochs: 120,
-    batchSize: 4,
-    shuffle: true,
-    validationData: [test.inputs, test.outputs],
-  })
+  .fit(real.inputs, real.outputs, options)
   .then(() => {
     model.predict(tf.tensor2d([[1.0, 1.0]])).print();
     model.predict(tf.tensor2d([[1.0, 0.0]])).print();

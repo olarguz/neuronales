@@ -9,7 +9,7 @@ let layers = {
     activation: "sigmoid",
   },
   inner: {
-    units: [1, 2, 2],
+    units: [4, 3, 4],
     activation: "sigmoid",
   },
   output: {
@@ -37,16 +37,15 @@ const test = {
   ]),
   outputs: tf.tensor1d([0.0, 1.0, 1.0, 0.0]),
 };
-model
-  .fit(real.inputs, real.outputs, {
-    epochs: 200,
-    batchSize: 4,
-    shuffle: true,
-    validationData: [test.inputs, test.outputs],
-  })
-  .then(() => {
-    model.predict(tf.tensor2d([[1.0, 1.0]])).print();
-    model.predict(tf.tensor2d([[1.0, 0.0]])).print();
-    model.predict(tf.tensor2d([[0.0, 1.0]])).print();
-    model.predict(tf.tensor2d([[0.0, 0.0]])).print();
-  });
+const options = {
+  epochs: 20,
+  batchSize: 4,
+  shuffle: true,
+  validationData: [test.inputs, test.outputs],
+};
+model.fit(real.inputs, real.outputs, options).then(() => {
+  model.predict(tf.tensor2d([[1.0, 1.0]])).print();
+  model.predict(tf.tensor2d([[1.0, 0.0]])).print();
+  model.predict(tf.tensor2d([[0.0, 1.0]])).print();
+  model.predict(tf.tensor2d([[0.0, 0.0]])).print();
+});

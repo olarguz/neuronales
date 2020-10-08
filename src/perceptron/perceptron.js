@@ -9,11 +9,12 @@ exports.createModel = (layers) => {
       activation: layers.input.activation,
     })
   );
-  layers.inner.units.map((unit) =>
-    model.add(
-      tf.layers.dense({ units: unit, activation: layers.inner.activation })
-    )
-  );
+  if (layers.inner) {
+    layers.inner.units.map((unit) =>
+      model.add(
+        tf.layers.dense({ units: unit, activation: layers.inner.activation })
+      ));
+  }
   model.add(
     tf.layers.dense({
       units: layers.output.units,
@@ -22,8 +23,8 @@ exports.createModel = (layers) => {
     })
   );
   model.compile({
-    loss: "meanSquaredError",
-    optimizer: tf.train.adam(),
+    loss: "meanAbsoluteError",
+    optimizer: tf.train.sgd(0.025),
     metrics: ["accuracy"],
   });
   return model;
