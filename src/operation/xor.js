@@ -14,31 +14,29 @@ let layers = {
   },
   output: {
     units: 1,
-    activation: "softmax",
+    activation: "sigmoid",
   },
 };
 model = perceptron.createModel(layers);
 
+let matIn = [
+  [1.0, 1.0],
+  [1.0, 0.0],
+  [0.0, 1.0],
+  [0.0, 0.0],
+];
+let matOut = [[0.0], [1.0], [1.0], [0.0]];
 const real = {
-  inputs: tf.tensor2d([
-    [1.0, 1.0],
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [0.0, 0.0],
-  ]),
-  outputs: tf.tensor1d([0.0, 1.0, 1.0, 0.0]),
+  inputs: tf.tensor2d(matIn),
+  outputs: tf.tensor2d(matOut),
 };
 const test = {
-  inputs: tf.tensor2d([
-    [1.0, 1.0],
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [0.0, 0.0],
-  ]),
-  outputs: tf.tensor1d([0.0, 1.0, 1.0, 0.0]),
+  inputs: tf.tensor2d(matIn),
+  outputs: tf.tensor2d(matOut),
 };
+
 const options = {
-  epochs: 20,
+  epochs: 50000,
   batchSize: 4,
   shuffle: true,
   validationData: [test.inputs, test.outputs],

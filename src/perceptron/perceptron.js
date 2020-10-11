@@ -13,7 +13,8 @@ exports.createModel = (layers) => {
     layers.inner.units.map((unit) =>
       model.add(
         tf.layers.dense({ units: unit, activation: layers.inner.activation })
-      ));
+      )
+    );
   }
   model.add(
     tf.layers.dense({
@@ -23,8 +24,8 @@ exports.createModel = (layers) => {
     })
   );
   model.compile({
-    loss: "meanAbsoluteError",
-    optimizer: tf.train.sgd(0.025),
+    loss: tf.losses.meanSquaredError,
+    optimizer: tf.train.sgd(0.1),
     metrics: ["accuracy"],
   });
   return model;
