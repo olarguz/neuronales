@@ -8,7 +8,7 @@
     "start:and": "node src/operation/and",
     "start:or": "node src/operation/or",
     "start:xor": "node src/operation/xor",
-    "start:suma": "node src/operation/suma",
+    "start:add": "node src/operation/add",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

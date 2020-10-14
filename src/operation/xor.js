@@ -8,10 +8,6 @@ let layers = {
     units: 2,
     activation: "sigmoid",
   },
-  inner: {
-    units: [4, 3, 4],
-    activation: "sigmoid",
-  },
   output: {
     units: 1,
     activation: "sigmoid",

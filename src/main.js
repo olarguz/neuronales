@@ -8,3 +8,6 @@ console.log("   npm run start:or");
 
 console.log("\nCompuerta XOR");
 console.log("   npm run start:xor");
+
+console.log("\Operacion ADD");
+console.log("   npm run start:add");
