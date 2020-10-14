@@ -1,7 +1,7 @@
 const tf = require("@tensorflow/tfjs");
 const perceptron = require("../perceptron/perceptron");
 
-console.log("Compuerta And");
+console.log("Operacion ADD");
 
 let layers = {
   input: {
@@ -42,7 +42,7 @@ const options = {
   shuffle: true,
   validationData: [test.inputs, test.outputs],
 };
-model.fit(real.inputs, real.outputs, options).then((results) => {
+model.fit(real.inputs, real.outputs, options).then(() => {
   model.predict(tf.tensor2d([[1.0, 1.0]])).print();
   model.predict(tf.tensor2d([[10.0, 5.0]])).print();
 });
