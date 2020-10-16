@@ -3,16 +3,9 @@ const perceptron = require("../perceptron/perceptron");
 
 console.log("Compuerta XOr");
 
-let layers = {
-  input: {
-    units: 2,
-    activation: "sigmoid",
-  },
-  output: {
-    units: 1,
-    activation: "sigmoid",
-  },
-};
+let fileName = process.argv[2];
+
+let layers = tools.readFile(fileName);
 model = perceptron.createModel(layers);
 
 let matIn = [
