@@ -1,13 +1,15 @@
-console.log("Ejemplos de entranamiento ML");
+(() => {
+  console.log("Ejemplos de entranamiento ML");
 
-console.log("\nCompuerta AND");
-console.log("   npm run start:and");
+  console.log("\nEntrenamiento Compuerta AND");
+  console.log("   npm run training:and data/and.json");
 
-console.log("\nCompuerta OR");
-console.log("   npm run start:or");
+  console.log("\nEntrenamiento Compuerta OR");
+  console.log("   npm run training:or data/or.json");
 
-console.log("\nCompuerta XOR");
-console.log("   npm run start:xor");
+  console.log("\nEntrenamiento Compuerta XOR");
+  console.log("   npm run training:xor data/xor.json");
 
-console.log("\Operacion ADD");
-console.log("   npm run start:add");
+  console.log("\nEntrenamiento Operacion ADD");
+  console.log("   npm run training:add data/add.json");
+})();
