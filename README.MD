@@ -53,7 +53,7 @@ El proceso de entrenamiento se lleva a cabo en la funcion trainning en la cual s
 
 ## Uso del perceptron entrenado
 
-
+__Pendiente__
 
 ## Manual de ejecución.
 
