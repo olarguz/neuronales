@@ -6,7 +6,7 @@ que permiten su uso fácil.
 - [X] Definición de un perceptrón de forma automática mediante un archivo de configuración.
 - [X] Creación del proceso de entrenamiento.
 - [ ] Uso del perceptrón entrenado.
-- [-] Manual de ejecución.
+- [X] Manual de ejecución.
 
 ## Archivo de configuración
 
