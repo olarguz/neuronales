@@ -2,10 +2,7 @@ const tf = require("@tensorflow/tfjs");
 const perceptron = require("../perceptron/perceptron");
 const tools = require("../tools/tools");
 
-const training = (fileName) => {
-  let layers = tools.readFile(fileName);
-  model = perceptron.createModel(layers);
-
+const training = (modelo) => {
   let matIn = [
     [1.0, 1.0],
     [1.0, 0.0],
@@ -29,9 +26,9 @@ const training = (fileName) => {
     shuffle: true,
     validationData: [test.inputs, test.outputs],
   };
-  model.fit(real.inputs, real.outputs, options).then(() => {
-    model.predict(tf.tensor2d([[1.0, 1.0]])).print();
-    model.predict(tf.tensor2d([[10.0, 5.0]])).print();
+  modelo.fit(real.inputs, real.outputs, options).then(() => {
+    modelo.predict(tf.tensor2d([[1.0, 1.0]])).print();
+    modelo.predict(tf.tensor2d([[10.0, 5.0]])).print();
   });
 };
 
@@ -41,7 +38,9 @@ const training = (fileName) => {
 
   if (argv.length === 3) {
     let fileName = process.argv[2];
-    training(fileName);
+    let layers = tools.readFile(fileName);
+    let modelo = perceptron.createModel(layers);
+    training(modelo);
   } else {
     console.error("Error: numero de parametros incorrectos");
     console.error("debe escribir el siguiente comando:");
