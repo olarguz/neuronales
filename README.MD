@@ -60,9 +60,9 @@ __Pendiente__
 Para la ejeción del lproyecto se apoya el uso del paquete de instalación de node npm.
 - Para visualizar las operaciones existentes se ejecuta el siguiente comando:
 ```
-npm run training:[operacion] data/[operacion].json
+npm run start
 ```
 - Para ejecutar el entrenamiento se puede ejecutar el siguiente comando:
 ```
-npm run start
+npm run training:[operacion] data/[operacion].json
 ```
