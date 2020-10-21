@@ -80,7 +80,7 @@ Capa de salida:
    	 })
 	);
 ```
-![Alt text](relative/path/to/img.jpg?raw=true "Title")
+![Alt text](https://github.com/olarguz/neuronales/blob/feature/descripcion/images/ejemploAND.png?raw=true "Operador AND")
 
 ## Proceso de entrenamiento.
 
