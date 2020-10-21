@@ -4,6 +4,7 @@ Este es un ejercicio para el manejo de redes neuronales usando TensorFlow y Node
 que permiten su uso fácil.
 
 - [X] Definición de un perceptrón de forma automática mediante un archivo de configuración.
+- [X] Descripción de la estructura del perceptrón.
 - [X] Creación del proceso de entrenamiento.
 - [ ] Uso del perceptrón entrenado.
 - [X] Manual de ejecución.
@@ -42,6 +43,45 @@ El perceptron, con la configuración cargada se crea en con la funcion que se pr
     let layers = tools.readFile(fileName);
     let modelo = perceptron.createModel(layers);
 ```
+## Descripción de la estructura del perceptrón.
+
+Iniciamos declarando un modelo secuencial
+```
+const model = tf.sequential();
+```
+Al cual se le asignan sus respectivas capas de entradas, capas ocultas y capa de salida, previamente configuradas, es importante mencionar que las capas deben tener el componente dense, para que exista una conexión entre una neurona de una capa con todas las neuronas de la siguiente capa
+
+	
+Capa de entrada, en units definimos cuantos nodos tendrá nuestra capa:
+```	
+tf.layers.dense({
+  units: layers.input.units,
+  inputShape: [layers.input.units],
+  activation: layers.input.activation,
+})
+```
+Capa oculta:
+```
+if (layers.inner) {
+  layers.inner.units.map((unit) =>
+    model.add(
+      tf.layers.dense({ units: unit, activation: layers.inner.activation })
+    )
+  );
+}
+```
+Capa de salida:
+```
+model.add(
+  tf.layers.dense({
+    units: layers.output.units,
+    kernelInitializer: "varianceScaling",
+    activation: layers.output.activation,
+  })
+);
+```
+### Descripción gráfica del operador AND
+![Alt text](https://github.com/olarguz/neuronales/blob/feature/descripcion/images/ejemploAND.png?raw=true "Operador AND")
 
 ## Proceso de entrenamiento.
 
