@@ -81,7 +81,7 @@ model.add(
 );
 ```
 ### Descripción gráfica del operador AND
-![Alt text](https://github.com/olarguz/neuronales/blob/feature/descripcion/images/ejemploAND.png?raw=true "Operador AND")
+![Imagen Operador AND](./images/ejemploAND.png?raw=true "Operador AND")
 
 ## Proceso de entrenamiento.
 
