@@ -1,4 +1,5 @@
 const tf = require("@tensorflow/tfjs");
+require("tfjs-node-save");
 const perceptron = require("../perceptron/perceptron");
 const tools = require("../tools/tools");
 
@@ -26,11 +27,20 @@ const training = async (modelo) => {
   };
 
   await modelo.fit(real.inputs, real.outputs, options);
+  modelo.save("file://./and-trained");
 
-  modelo.predict(tf.tensor2d([[1.0, 1.0]])).print();
-  modelo.predict(tf.tensor2d([[1.0, 0.0]])).print();
-  modelo.predict(tf.tensor2d([[0.0, 1.0]])).print();
-  modelo.predict(tf.tensor2d([[0.0, 0.0]])).print();
+  console.log(
+    Array.from(modelo.predict(tf.tensor2d([[1.0, 1.0]])).dataSync())[0]
+  );
+  console.log(
+    Array.from(modelo.predict(tf.tensor2d([[1.0, 0.0]])).dataSync())[0]
+  );
+  console.log(
+    Array.from(modelo.predict(tf.tensor2d([[0.0, 1.0]])).dataSync())[0]
+  );
+  console.log(
+    Array.from(modelo.predict(tf.tensor2d([[0.0, 0.0]])).dataSync())[0]
+  );
 };
 
 (async () => {
