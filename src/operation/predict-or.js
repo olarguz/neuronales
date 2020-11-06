@@ -1,4 +1,3 @@
-const { input } = require("@tensorflow/tfjs");
 const tf = require("@tensorflow/tfjs");
 require("tfjs-node-save");
 
@@ -10,8 +9,8 @@ const predict = (modelo, input1, input2) =>
   modelo.predict(createInput(input1, input2));
 
 (async () => {
-  console.log("Cargar el modelo Compuerta And");
-  let filename = "and-trained";
+  console.log("Cargar el modelo Compuerta Or");
+  let filename = "or-trained";
   const modelo = await tf.loadLayersModel(
     "file://./trained-models/".concat(filename).concat("/model.json")
   );
