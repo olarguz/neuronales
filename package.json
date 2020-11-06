@@ -6,7 +6,9 @@
   "scripts": {
     "start": "node src/main",
     "training:and": "node src/operation/training-and",
+    "predict:and": "node src/operation/predict-and",
     "training:or": "node src/operation/training-or",
+    "predict:or": "node src/operation/predict-or",
     "training:xor": "node src/operation/training-xor",
     "training:add": "node src/operation/training-add",
     "test": "echo \"Error: no test specified\" && exit 1"

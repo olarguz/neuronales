@@ -45,19 +45,29 @@ El perceptron, con la configuración cargada se crea en con la funcion que se pr
 
 ## Proceso de entrenamiento.
 
-El proceso de entrenamiento se lleva a cabo en la funcion trainning en la cual se toma el perceptrón.
+El proceso de entrenamiento se lleva a cabo en la funcion trainning en la cual se toma el perceptrón, 
+los datos con los cuales se desea entrenar el modelo y el nombre del archivo/carpeta en la cual se va
+a almacenar el perceptron entrenado.
 
 ```
-    training(modelo);
+    training(modelo,data,fileName);
 ```
+
+### Almacenamiento del modelo entrenado.
+
+_Pendiente_
+
+### Carga del modelo entrenado.
+
+_Pendiente_
 
 ## Uso del perceptron entrenado
 
-__Pendiente__
+_Pendiente_
 
 ## Manual de ejecución.
 
-Para la ejeción del lproyecto se apoya el uso del paquete de instalación de node npm.
+Para la ejeción del proyecto se apoya el uso del paquete de instalación de node npm.
 - Para visualizar las operaciones existentes se ejecuta el siguiente comando:
 ```
 npm run start
@@ -65,4 +75,8 @@ npm run start
 - Para ejecutar el entrenamiento se puede ejecutar el siguiente comando:
 ```
 npm run training:[operacion] data/[operacion].json
+```
+- Para evaluar el perceptron entrenado se puede ejecutar el siguiente comando:
+```
+npm run predict:[operacion]
 ```
