@@ -87,7 +87,18 @@ require("tfjs-node-save");
 
 ## Uso del perceptron entrenado
 
-_Pendiente_
+Para el uso del perceptrón entrenado debemos primero cargarlo, luego empezar a usarlo.
+En el ejemplo que se ha utilizado para ilustrar el proceso se requiere que el modelo reciba dos entrada que pueden tener los valores (1/0) y la respuesta es un solo valor que puede ser (1/0). 
+En el caso de las redes neuronale el valor esperado es un aproximado al valor esperado. 
+Con el entrenamiento realizado se espera que por lo menos el 95% certeza en los valores obtenidos, es decir cuando la respuesta debe ser 1, el perceptro responderá valores superiores a 0.95 y cuando el valor esperado es 0, se espera que los valores sean menores a 0.05.
+
+```
+  console.log("Operar el modelo");
+  console.log("And(1,1) =>", extractValue(predict(modelo, 1.0, 1.0)));
+  console.log("And(1,0) =>", extractValue(predict(modelo, 1.0, 0.0)));
+  console.log("And(0,1) =>", extractValue(predict(modelo, 0.0, 1.0)));
+  console.log("And(0,0) =>", extractValue(predict(modelo, 0.0, 0.0)));
+```
 
 ## Manual de ejecución.
 
