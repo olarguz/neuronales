@@ -5,7 +5,7 @@ exports.createModel = (layers) => {
   model.add(
     tf.layers.dense({
       units: layers.input.units,
-      inputShape: [layers.input.units],
+      inputShape: [layers.input.input],
       activation: layers.input.activation,
     })
   );

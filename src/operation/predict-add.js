@@ -22,3 +22,8 @@ const predict = (modelo, input1, input2) =>
   console.log("Add(8,3) =>", extractValue(predict(modelo, 8.0, 3.0)));
   console.log("Add(0,4) =>", extractValue(predict(modelo, 0.0, 4.0)));
 })();
+
+/*
+Run with:
+  npm run predict:add
+*/
