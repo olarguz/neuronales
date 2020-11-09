@@ -1,47 +1,31 @@
 const tf = require("@tensorflow/tfjs");
+require("tfjs-node-save");
 const perceptron = require("../perceptron/perceptron");
+const { training } = require("../perceptron/training");
 const tools = require("../tools/tools");
 
-const training = async (modelo) => {
-  let matIn = [
-    [1.0, 1.0],
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [0.0, 0.0],
-  ];
-  let matOut = [[0.0], [1.0], [1.0], [0.0]];
-  const real = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
+const createXOrInputData = () => {
+  return {
+    matIn: [
+      [1.0, 1.0],
+      [1.0, 0.0],
+      [0.0, 1.0],
+      [0.0, 0.0],
+    ],
+    matOut: [[0.0], [1.0], [1.0], [0.0]],
   };
-  const test = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
-  };
-
-  const options = {
-    epochs: 50000,
-    batchSize: 4,
-    shuffle: true,
-    validationData: [test.inputs, test.outputs],
-  };
-  await modelo.fit(real.inputs, real.outputs, options);
-
-  await modelo.predict(tf.tensor2d([[1.0, 1.0]])).print();
-  await modelo.predict(tf.tensor2d([[1.0, 0.0]])).print();
-  await modelo.predict(tf.tensor2d([[0.0, 1.0]])).print();
-  await modelo.predict(tf.tensor2d([[0.0, 0.0]])).print();
 };
 
-(() => {
+(async () => {
   console.log("Entrenamiento Compuerta XOr");
   let argv = process.argv;
 
   if (argv.length === 3) {
     let fileName = process.argv[2];
     let layers = tools.readFile(fileName);
+    let data = createXOrInputData();
 
-    await training(perceptron.createModel(layers));
+    await training(perceptron.createModel(layers), data, "xor-trained");
   } else {
     console.error("Error: numero de parametros incorrectos");
     console.error("debe escribir el siguiente comando:");

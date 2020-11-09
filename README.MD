@@ -6,16 +6,17 @@ que permiten su uso fácil.
 - [X] Definición de un perceptrón de forma automática mediante un archivo de configuración.
 - [X] Descripción de la estructura del perceptrón.
 - [X] Creación del proceso de entrenamiento.
-- [ ] Uso del perceptrón entrenado.
+- [X] Uso del perceptrón entrenado.
 - [X] Manual de ejecución.
 
 ## Archivo de configuración
 
 El archivo de configuración consiste en un archivo en formato json, el cual consta de tres partes
-- input: Corresponde a la capa de entradas y a la primera capa ocultas, la cual tiene el mismo numero en neuronas que la capa de entrada, esta primera capa oculta, lo mismo que la capa de entrada son obligatorias.
+- input: Corresponde a la capa de entradas y a la primera capa ocultas, la cual tiene el numero en neuronas de la capa de entrada definido en la etiqueta input, el numero de neuronas definido en la primera capa oculta se encuentra en la etiqueta units, lo mismo que la capa de entrada son obligatorias.
 ```
     "input": {
-      "units": 2,
+      "input": 2,
+      "units": 4,
       "activation": "sigmoid"
     },
 ```
@@ -85,19 +86,63 @@ model.add(
 
 ## Proceso de entrenamiento.
 
-El proceso de entrenamiento se lleva a cabo en la funcion trainning en la cual se toma el perceptrón.
+El proceso de entrenamiento se lleva a cabo en la funcion trainning en la cual se toma el perceptrón, 
+los datos con los cuales se desea entrenar el modelo y el nombre del archivo/carpeta en la cual se va
+a almacenar el perceptron entrenado.
 
 ```
-    training(modelo);
+    training(modelo,data,fileName);
+```
+
+### Almacenamiento del modelo entrenado.
+
+Una vez que se entrena el modelo es importante se almacene, pues el proceso de entrenamiento es muy costoso por la cantidade de operaciones realizadas para el entrenamiento.
+Para almacenar el modelo y los valores de los pesos en las conexiones entre las diferentes capas se utiliza la funcion *save* junto con el tipo de almacenamiento que se desea realizar, la ruta y el nombre de la carpeta en la que se va a almacernar la informacion.
+Esta función produce dos archivos: *model.json* que tiene la estructura del perceptrón y *weights.bin* que tiene los valores de la red entrenada.
+_Nota_: Es mandatorio el uso de la librería *tfjs-node-save*, pues ahí están definidos los handlers que permiten realizar el manejo del almacenamiento en el sistema de archivos. 
+
+```
+require("tfjs-node-save");
+
+
+  modelo.save("file://./trained-models/".concat(fileName));
+
+```
+
+### Carga del modelo entrenado.
+
+Con la red entrenada y el modelo almacenado en archivos ahora el proceso de uso del perceptrón entrenado para por la carga del perceptrón para poder ser usado en otra aplicación diferente de la aplicación de entrenamiento.
+Para eso se puede usar la función *loadLayersModel*, la cual se encarga de cargar el modelo para su posterior uso.
+_Nota_: Es mandatorio el uso de la librería *tfjs-node-save*, pues ahí están definidos los handlers que permiten realizar el manejo del almacenamiento en el sistema de archivos. 
+
+```
+require("tfjs-node-save");
+
+
+  const modelo = await tf.loadLayersModel(
+    "file://./trained-models/".concat(filename).concat("/model.json")
+  );
+
 ```
 
 ## Uso del perceptron entrenado
 
-__Pendiente__
+Para el uso del perceptrón entrenado debemos primero cargarlo, luego empezar a usarlo.
+En el ejemplo que se ha utilizado para ilustrar el proceso se requiere que el modelo reciba dos entrada que pueden tener los valores (1/0) y la respuesta es un solo valor que puede ser (1/0). 
+En el caso de las redes neuronale el valor esperado es un aproximado al valor esperado. 
+Con el entrenamiento realizado se espera que por lo menos el 95% certeza en los valores obtenidos, es decir cuando la respuesta debe ser 1, el perceptro responderá valores superiores a 0.95 y cuando el valor esperado es 0, se espera que los valores sean menores a 0.05.
+
+```
+  console.log("Operar el modelo");
+  console.log("And(1,1) =>", extractValue(predict(modelo, 1.0, 1.0)));
+  console.log("And(1,0) =>", extractValue(predict(modelo, 1.0, 0.0)));
+  console.log("And(0,1) =>", extractValue(predict(modelo, 0.0, 1.0)));
+  console.log("And(0,0) =>", extractValue(predict(modelo, 0.0, 0.0)));
+```
 
 ## Manual de ejecución.
 
-Para la ejeción del lproyecto se apoya el uso del paquete de instalación de node npm.
+Para la ejeción del proyecto se apoya el uso del paquete de instalación de node npm.
 - Para visualizar las operaciones existentes se ejecuta el siguiente comando:
 ```
 npm run start
@@ -105,4 +150,8 @@ npm run start
 - Para ejecutar el entrenamiento se puede ejecutar el siguiente comando:
 ```
 npm run training:[operacion] data/[operacion].json
+```
+- Para evaluar el perceptron entrenado se puede ejecutar el siguiente comando:
+```
+npm run predict:[operacion]
 ```

@@ -1,36 +1,19 @@
 const tf = require("@tensorflow/tfjs");
+require("tfjs-node-save");
 const perceptron = require("../perceptron/perceptron");
+const { training } = require("../perceptron/training");
 const tools = require("../tools/tools");
 
-const training = async (modelo) => {
-  let matIn = [
-    [1.0, 1.0],
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [0.0, 0.0],
-  ];
-  let matOut = [[1.0], [0.0], [0.0], [0.0]];
-  const real = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
+const createAndInputData = () => {
+  return {
+    matIn: [
+      [1.0, 1.0],
+      [1.0, 0.0],
+      [0.0, 1.0],
+      [0.0, 0.0],
+    ],
+    matOut: [[1.0], [0.0], [0.0], [0.0]],
   };
-  const test = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
-  };
-
-  const options = {
-    epochs: 15000,
-    shuffle: true,
-    validationData: [test.inputs, test.outputs],
-  };
-
-  await modelo.fit(real.inputs, real.outputs, options);
-
-  modelo.predict(tf.tensor2d([[1.0, 1.0]])).print();
-  modelo.predict(tf.tensor2d([[1.0, 0.0]])).print();
-  modelo.predict(tf.tensor2d([[0.0, 1.0]])).print();
-  modelo.predict(tf.tensor2d([[0.0, 0.0]])).print();
 };
 
 (async () => {
@@ -40,8 +23,9 @@ const training = async (modelo) => {
   if (argv.length === 3) {
     let fileName = process.argv[2];
     let layers = tools.readFile(fileName);
+    let data = createAndInputData();
 
-    await training(perceptron.createModel(layers));
+    await training(perceptron.createModel(layers), data, "and-trained");
   } else {
     console.error("Error: numero de parametros incorrectos");
     console.error("debe escribir el siguiente comando:");
