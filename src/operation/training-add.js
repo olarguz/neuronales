@@ -1,49 +1,40 @@
 const tf = require("@tensorflow/tfjs");
+require("tfjs-node-save");
 const perceptron = require("../perceptron/perceptron");
+const { training } = require("../perceptron/training");
 const tools = require("../tools/tools");
 
-const training = async (modelo) => {
-  let matIn = [
-    [1.0, 1.0],
-    [1.0, 0.0],
-    [0.0, 1.0],
-    [0.0, 0.0],
-    [10.0, 5.0],
-    [-10.0, -5.0],
-  ];
-  let matOut = [[2.0], [1.0], [1.0], [0.0], [15], [-15]];
-  const real = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
+const createAddInputData = (size, min, max) => {
+  let delta = max - min;
+  let inValues = [...Array(size).keys()].map((v) => [
+    Math.random() * delta + min,
+    Math.random() * delta + min,
+  ]);
+  let outValues = inValues.map((v) => [v[0] + v[1]]);
+  return {
+    matIn: inValues,
+    matOut: outValues,
   };
-  const test = {
-    inputs: tf.tensor2d(matIn),
-    outputs: tf.tensor2d(matOut),
-  };
-  const options = {
-    epochs: 40000,
-    batchSize: 6,
-    shuffle: true,
-    validationData: [test.inputs, test.outputs],
-  };
-  await modelo.fit(real.inputs, real.outputs, options);
-
-  await modelo.predict(tf.tensor2d([[1.0, 1.0]])).print();
-  await modelo.predict(tf.tensor2d([[10.0, 5.0]])).print();
 };
 
-(() => {
+(async () => {
   console.log("Entrenamiento Operacion ADD");
   let argv = process.argv;
 
   if (argv.length === 3) {
     let fileName = process.argv[2];
     let layers = tools.readFile(fileName);
+    let data = createAddInputData(1000, -1000, 1000);
 
-    await training(perceptron.createModel(layers));
+    await training(perceptron.createModel(layers), data, "add-trained");
   } else {
     console.error("Error: numero de parametros incorrectos");
     console.error("debe escribir el siguiente comando:");
     console.error("\t", "npm run training:[operation] [archivo.json]");
   }
 })();
+
+/*
+Run with:
+  npm run training:add data/add.json 
+*/

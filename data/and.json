@@ -1,10 +1,7 @@
 {
     "input": {
-      "units": 2,
-      "activation": "sigmoid"
-    },
-    "inner": {
-      "units": [4],
+      "input": 2,
+      "units": 4,
       "activation": "sigmoid"
     },
     "output": {
