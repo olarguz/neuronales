@@ -2,14 +2,14 @@
   "input": {
     "input": 2,
     "units": 6,
-    "activation": "relu"
+    "activation": "sigmoid"
   },
   "inner": {
     "units": [12, 12, 6],
-    "activation": "relu"
+    "activation": "sigmoid"
   },
   "output": {
     "units": 1,
-    "activation": "linear"
+    "activation": "sigmoid"
   }
 }

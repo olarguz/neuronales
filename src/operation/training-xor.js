@@ -24,11 +24,17 @@ const createXOrInputData = () => {
     let fileName = process.argv[2];
     let layers = tools.readFile(fileName);
     let data = createXOrInputData();
+    let parameters = {
+      fileName: "xor-trained",
+      epochs: 20000,
+      shuffle: true,
+    };
 
-    await training(perceptron.createModel(layers), data, "xor-trained");
+    await training(perceptron.createModel(layers), data, parameters);
   } else {
-    console.error("Error: numero de parametros incorrectos");
-    console.error("debe escribir el siguiente comando:");
-    console.error("\t", "npm run training:[operation] [archivo.json]");
+    let error = "Error: numero de parametros incorrectos\n"
+      .concat("debe escribir el siguiente comando:")
+      .concat("\tnpm run training:[operation] [archivo.json]");
+    console.error(error);
   }
 })();
