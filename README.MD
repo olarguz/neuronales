@@ -91,7 +91,13 @@ los datos con los cuales se desea entrenar el modelo y el nombre del archivo/car
 a almacenar el perceptron entrenado.
 
 ```
-    training(modelo,data,fileName);
+    let parameters = {
+      fileName: "and-trained",
+      epochs: 20000,
+      shuffle: true,
+    };
+
+    await training(perceptron.createModel(layers), data, parameters);
 ```
 
 ### Almacenamiento del modelo entrenado.
