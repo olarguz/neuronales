@@ -12,7 +12,7 @@ que permiten su uso fácil.
 ## Archivo de configuración
 
 El archivo de configuración consiste en un archivo en formato json, el cual consta de tres partes
-- input: Corresponde a la capa de entradas y a la primera capa ocultas, la cual tiene el numero en neuronas de la capa de entrada definido en la etiqueta input, el numero de neuronas definido en la primera capa oculta se encuentra en la etiqueta units, lo mismo que la capa de entrada son obligatorias.
+- **`input`**: Corresponde a la capa de entradas y a la primera capa ocultas, la cual tiene el numero en neuronas de la capa de entrada definido en la etiqueta input, el numero de neuronas definido en la primera capa oculta se encuentra en la etiqueta units, lo mismo que la capa de entrada son obligatorias.
 ```
     "input": {
       "input": 2,
@@ -21,7 +21,7 @@ El archivo de configuración consiste en un archivo en formato json, el cual con
     },
 ```
 En el caso del ejemplo se aprecia que se crea una capa de entradas con dos neuronas y una capa oculta (obligatoria) de dos neuronas, junto con la funcion de activación sigmoide.
-- inner: Correspondiente a las capas ocultas, esta es una sección opcional.
+- **`inner`**: Correspondiente a las capas ocultas, esta es una sección opcional.
 ```
     "inner": {
       "units": [4],
@@ -29,7 +29,7 @@ En el caso del ejemplo se aprecia que se crea una capa de entradas con dos neuro
     },
 ```
 En el caso del ejemplo se aprecia que se crea una capa de oculta con cuatro neuronas, junto con la funcion de activación sigmoide. Como la representacion de unidades corresponde a un arreglo, eso quier decir que se pueden agregar mas capas con número de neuronas variables.
-- output: Corresponde a la capa de salidas, la cual es obligatoria.
+- **`output`**: Corresponde a la capa de salidas, la cual es obligatoria.
 ```
     "output": {
       "units": 1,

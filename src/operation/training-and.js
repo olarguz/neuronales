@@ -24,8 +24,13 @@ const createAndInputData = () => {
     let fileName = process.argv[2];
     let layers = tools.readFile(fileName);
     let data = createAndInputData();
+    let parameters = {
+      fileName: "and-trained",
+      epochs: 20000,
+      shuffle: true,
+    };
 
-    await training(perceptron.createModel(layers), data, "and-trained");
+    await training(perceptron.createModel(layers), data, parameters);
   } else {
     console.error("Error: numero de parametros incorrectos");
     console.error("debe escribir el siguiente comando:");
